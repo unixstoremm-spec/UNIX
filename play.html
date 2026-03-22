@@ -3,70 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UNIX STREAM - Player</title>
+    <title>UNIX STREAM - Now Playing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: #0b0c0d; color: white; font-family: sans-serif; overflow: hidden; }
+        body { margin: 0; background: #0b0c0d; color: white; font-family: 'Segoe UI', sans-serif; }
+        .nav-header { padding: 15px 40px; background: #121314; display: flex; align-items: center; border-bottom: 1px solid #222; }
+        .back-btn { color: #fdd835; text-decoration: none; font-weight: bold; font-size: 18px; display: flex; align-items: center; gap: 10px; }
         
-        .nav-header { 
-            padding: 15px 25px; 
-            background: #121314; 
-            display: flex; 
-            align-items: center;
-            border-bottom: 1px solid #222;
+        /* Player Design */
+        .main-container { padding: 40px; display: flex; flex-direction: column; align-items: center; }
+        .video-container { 
+            width: 100%; 
+            max-width: 1200px; 
+            aspect-ratio: 16/9; 
+            background: #000; 
+            border-radius: 20px; 
+            overflow: hidden; 
+            box-shadow: 0 0 50px rgba(253, 216, 53, 0.1); 
+            border: 2px solid #222;
         }
-        .back-btn { 
-            color: #fdd835; 
-            text-decoration: none; 
-            font-weight: bold; 
-            display: flex; 
-            align-items: center;
-            gap: 10px;
-        }
+        iframe { width: 100%; height: 100%; border: none; }
 
-        .player-container {
-            width: 100%;
-            height: calc(100vh - 60px); /* Header စာကြောင်းစာ ဖယ်ထားတာပါ */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #000;
-        }
+        /* Movie Info Below Player */
+        .info-section { width: 100%; max-width: 1200px; margin-top: 30px; text-align: left; }
+        .info-section h1 { color: #fdd835; font-size: 32px; margin-bottom: 10px; }
+        .tags { display: flex; gap: 10px; margin-bottom: 20px; }
+        .tag { background: #222; padding: 5px 15px; border-radius: 20px; font-size: 14px; color: #aaa; }
+        .desc { font-size: 17px; line-height: 1.6; color: #ccc; }
 
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* Loading စာတန်း */
-        .loading-text {
-            position: absolute;
-            z-index: -1;
-            color: #555;
+        @media (max-width: 768px) {
+            .main-container { padding: 10px; }
+            .info-section h1 { font-size: 24px; }
         }
     </style>
 </head>
 <body>
 
     <div class="nav-header">
-        <a href="index.html" class="back-btn"> ← Back to Home </a>
+        <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
     </div>
 
-    <div class="player-container">
-        <div class="loading-text">Loading Video...</div>
-        <iframe id="videoFrame" src="" allowfullscreen="true" scrolling="no"></iframe>
+    <div class="main-container">
+        <div class="video-container">
+            <iframe id="videoPlayer" src="" allowfullscreen="true"></iframe>
+        </div>
+
+        <div class="info-section">
+            <h1 id="movieTitle">Movie Loading...</h1>
+            <div class="tags">
+                <span class="tag">HD 1080p</span>
+                <span class="tag">English</span>
+                <span class="tag">Streaming</span>
+            </div>
+            <p class="desc">UNIX STREAM မှ ကြိုဆိုပါသည်။ အကယ်၍ ဗီဒီယို မပွင့်ပါက ခဏစောင့်ပေးပါ သို့မဟုတ် လိုင်းပြန်စစ်ပေးပါ။ ကောင်းမွန်စွာ ကြည့်ရှုနိုင်ဖို့ Telegram Bot နဲ့ တိုက်ရိုက်ချိတ်ဆက်ပေးထားပါတယ်။</p>
+        </div>
     </div>
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);
-        const movieUrl = urlParams.get('url');
-
-        if (movieUrl) {
-            // URL ထဲက Link ကို iframe ထဲ တန်းထည့်လိုက်တာပါ
-            document.getElementById('videoFrame').src = movieUrl;
-        } else {
-            alert("ဗီဒီယို Link ရှာမတွေ့ပါ!");
+        const videoUrl = urlParams.get('url');
+        if (videoUrl) {
+            document.getElementById('videoPlayer').src = videoUrl;
         }
     </script>
 
