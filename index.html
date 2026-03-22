@@ -3,84 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UNIX STREAM - Collection List</title>
+    <title>UNIX STREAM - My Collection</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* --- Clean Core Styles --- */
+        /* --- Reference ပုံအတိုင်း Clean & Dark Theme --- */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', 'Segoe UI', sans-serif; }
         body { background-color: #0c0c0d; color: #f9f9f9; overflow-x: hidden; }
 
-        /* --- Header Section (Icon + Title + Notification) --- */
-        header { padding: 30px 20px; display: flex; justify-content: space-between; align-items: center; }
+        /* --- Header (Back + Title + Bell) --- */
+        header { padding: 30px 20px; display: flex; justify-content: space-between; align-items: center; position: fixed; top: 0; left: 0; width: 100%; background-color: #0c0c0d; z-index: 1000; }
         .back-btn { color: #f9f9f9; font-size: 20px; text-decoration: none; }
-        .page-title { font-size: 18px; font-weight: 600; text-align: center; flex-grow: 1; }
+        .page-title { font-size: 18px; font-weight: 600; text-align: center; flex-grow: 1; text-transform: capitalize; }
         .notification-btn { color: #f9f9f9; font-size: 20px; text-decoration: none; position: relative; }
         .notification-badge { position: absolute; top: -5px; right: -5px; width: 10px; height: 10px; background: #E21B23; border-radius: 50%; border: 2px solid #0c0c0d; }
 
-        /* --- Main Content Section --- */
-        main { padding-bottom: 90px; }
+        /* --- Main Content Area --- */
+        main { padding-top: 90px; padding-bottom: 100px; }
 
-        /* --- Featured Collection Card --- */
-        .featured-collection-container { padding: 0 20px; margin-bottom: 30px; }
-        .featured-collection-card {
-            width: 100%; height: 500px; border-radius: 30px;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent 40%),
-                        url('https://images.tntdrama.com/assets/images/2021/11/bobafett-poster-v1-1.jpg');
+        /* --- Featured "Scream 7" Collection Card (Big Poster) --- */
+        .featured-container { padding: 0 20px; margin-bottom: 40px; }
+        .featured-card {
+            width: 100%; height: 550px; border-radius: 30px;
+            /* Reference ပုံအတိုင်း အောက်ကနေ အမည်းရောင် မှေးမှိန်သွားသည့် Gradient */
+            background: linear-gradient(to top, rgba(12,12,13,1) 10%, rgba(12,12,13,0.6) 30%, transparent 60%),
+                        url('https://ntvb.tmsimg.com/assets/p28448171_v_h8_ad.jpg?w=1280&h=720'); /* သင့် Scream 7 ပုံ */
             background-size: cover; background-position: center;
             position: relative; overflow: hidden;
-            display: flex; flex-direction: column; justify-content: flex-end; padding: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            border: 1px solid rgba(255,255,255,0.1);
+            display: flex; flex-direction: column; justify-content: flex-end; padding: 35px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.08);
         }
-        .collection-name { font-size: 18px; color: white; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px; }
-        .collection-description { font-size: 14px; color: #ccc; margin-bottom: 20px; }
-        .collection-stats { color: #fdd835; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 15px; }
+        .featured-title { font-size: 22px; font-weight: 700; color: white; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+        .featured-desc { font-size: 14px; color: #ccc; margin-bottom: 25px; line-height: 1.5; max-width: 400px; }
+        
+        /* Reference ပုံထဲက Stats Icons (သင့်အတွက် အဝါရောင်သုံးထားသည်) */
+        .featured-stats { color: #fdd835; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 18px; }
+        .featured-stats i { color: #888; margin-right: 5px; }
 
-        /* --- Row Section for Collection List --- */
-        .section-header { padding: 0 25px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-        .section-header h2 { font-size: 18px; font-weight: 700; }
-        .section-header a { color: #888; font-size: 13px; font-weight: 500; }
+        /* --- Movie Grid (Collection List) --- */
+        .section-header { padding: 0 25px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .section-header h2 { font-size: 18px; font-weight: 700; text-transform: capitalize; }
+        .section-header a { color: #888; font-size: 13px; font-weight: 500; text-decoration: none; }
 
-        .collection-list-row { display: flex; overflow-x: auto; padding: 0 20px; gap: 20px; scrollbar-width: none; }
-        .collection-list-row::-webkit-scrollbar { display: none; }
+        .movie-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 25px;
+            padding: 0 20px;
+        }
 
-        .collection-item-card { min-width: 140px; background: #121314; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); }
-        .collection-item-card img { width: 100%; height: 200px; object-fit: cover; }
-        .collection-item-info { padding: 12px; }
-        .collection-item-info h3 { font-size: 13px; margin-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #fff; }
-        .collection-item-details { color: #888; font-size: 11px; font-weight: 500; display: flex; align-items: center; gap: 8px; }
+        .movie-card {
+            background: #121314;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.3s;
+            text-decoration: none;
+            color: #f9f9f9;
+        }
+        .movie-card:hover { transform: translateY(-5px); border-color: #fdd835; }
+        
+        /* Reference ပုံကဲ့သို့ ဒေါင်လိုက် Poster များ */
+        .movie-card img { width: 100%; height: 240px; object-fit: cover; }
+        
+        .movie-info { padding: 15px; }
+        .movie-info h3 { font-size: 14px; font-weight: 600; margin-bottom: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        
+        /* Reference ပုံထဲကလို သေးငယ်သော အညွှန်းစာသားများ */
+        .movie-details { color: #888; font-size: 11px; font-weight: 500; display: flex; align-items: center; gap: 8px; text-transform: uppercase; }
+        .movie-details i { color: #fdd835; }
 
-        /* --- Bottom Navigation Bar --- */
+        /* --- Bottom Navigation Bar (Floating Style) --- */
         nav {
-            position: fixed; bottom: 0; left: 0; width: 100%;
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 450px;
             background: rgba(20, 21, 22, 0.95);
-            backdrop-filter: blur(5px);
-            height: 70px;
+            backdrop-filter: blur(10px);
+            height: 75px; border-radius: 35px;
             display: flex; justify-content: space-around; align-items: center;
-            box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
-            z-index: 1000; border-top: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            z-index: 1000; border: 1px solid rgba(255,255,255,0.08);
         }
-        nav a { color: #888; font-size: 22px; transition: 0.3s; display: flex; flex-direction: column; align-items: center; gap: 5px; }
-        nav a.active { color: #f9f9f9; }
-        nav a i { font-size: 22px; }
-        nav a span { font-size: 11px; font-weight: 500; text-transform: capitalize; }
+        nav a { color: #888; font-size: 22px; transition: 0.3s; display: flex; flex-direction: column; align-items: center; gap: 6px; text-decoration: none; }
+        nav a.active { color: #f9f9f9; transform: translateY(-3px); }
+        nav a span { font-size: 10px; font-weight: 600; text-transform: capitalize; opacity: 0; transition: 0.3s; }
+        nav a.active span { opacity: 1; }
 
+        /* --- Responsive Fixes --- */
+        @media (max-width: 768px) {
+            .featured-card { height: 450px; padding: 25px; }
+            .featured-title { font-size: 18px; }
+            .featured-desc { font-size: 12px; }
+            .movie-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            .movie-card img { height: 200px; }
+        }
     </style>
 </head>
 <body>
 
     <header>
         <a href="#" class="back-btn"><i class="fa-solid fa-arrow-left"></i></a>
-        <div class="page-title">Collection List</div>
+        <div class="page-title">My Collection</div>
         <a href="#" class="notification-btn"><i class="fa-solid fa-bell"></i><div class="notification-badge"></div></a>
     </header>
 
     <main>
-        <div class="featured-collection-container">
-            <div class="featured-collection-card">
-                <div class="collection-name">Boba Fett现代收藏 (The Book of Boba Fett Modern Collection)</div>
-                <p class="collection-description">All the movies and TV series about Boba Fett.</p>
-                <div class="collection-stats"><i class="fa-solid fa-clock"></i> 27 <i class="fa-solid fa-message"></i> 4.3k <i class="fa-solid fa-heart"></i> 7.5k</div>
+        <div class="featured-container">
+            <div class="featured-card">
+                <div class="featured-title">Scream 7 (2026) Collection</div>
+                <p class="featured-desc">The complete collection of Scream 7, including exclusive behind-the-scenes content.</p>
+                <div class="featured-stats">
+                    <span><i class="fa-solid fa-clock"></i> 1h 55m</span>
+                    <span><i class="fa-solid fa-message"></i> 1.2k</span>
+                    <span><i class="fa-solid fa-heart"></i> 4.5k</span>
+                </div>
             </div>
         </div>
 
@@ -88,28 +124,29 @@
             <h2>UNIX Originals</h2>
             <a href="#">See all</a>
         </div>
-        <div class="collection-list-row">
-            <a href="https://unixstoremm-my-test-bot.hf.space/stream/23?hash=4be59b" class="collection-item-card">
-                <img src="https://static.wikia.nocookie.net/lovedeathrobots/images/2/23/Love_Death_%2B_Robots_Volume_3_Poster.jpg" alt="Love Death + Robots">
-                <div class="collection-item-info">
-                    <h3>Love Death + Robots</h3>
-                    <div class="collection-item-details"><i class="fa-solid fa-tv"></i> Volume 3</div>
+        
+        <div class="movie-grid">
+            <a href="https://unixstoremm-my-test-bot.hf.space/stream/21?hash=8f4813" class="movie-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpBagNEK94f2_Wq1CniKY2qMvNnOgiN6ItrDhOXLkdAjz9n6ZJk3nkUcbEzgXPSuytv5YVnnbtVlbmBnQOiV_n3wqIwjMd015qODAl&s=10" alt="Garfield">
+                <div class="movie-info">
+                    <h3>The Garfield Movie</h3>
+                    <div class="movie-details"><i class="fa-solid fa-star"></i> 9.5 Rating</div>
                 </div>
             </a>
 
-            <a href="#" class="collection-item-card">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz9G5R7kLz7xQy_XkH_z7h8T7S7Z4l9E_i5w&s=10" alt="Westworld">
-                <div class="collection-item-info">
-                    <h3>Westworld</h3>
-                    <div class="collection-item-details"><i class="fa-solid fa-tv"></i> Season 4</div>
+            <a href="https://unixstoremm-my-test-bot.hf.space/stream/20?hash=e30e9e" class="movie-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJrVOTQrlzEGAHyyLreyxbQFFk-pFWcO1nIkE3dbAf3z6E9gTE2_kBM13Y5fvCIiC60FKjbQ&s=10" alt="The Lost Bus">
+                <div class="movie-info">
+                    <h3>The Lost Bus</h3>
+                    <div class="movie-details"><i class="fa-solid fa-star"></i> 8.9 Rating</div>
                 </div>
             </a>
 
-            <a href="#" class="collection-item-card">
-                <img src="https://static.wikia.nocookie.net/starwars/images/d/df/TheMandalorianSeries3OfficialPoster.jpg" alt="The Mandalorian">
-                <div class="collection-item-info">
-                    <h3>The Mandalorian</h3>
-                    <div class="collection-item-details"><i class="fa-solid fa-tv"></i> Season 3</div>
+            <a href="https://unixstoremm-my-test-bot.hf.space/stream/22?hash=6a6ed7" class="movie-card">
+                <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRnBxg1VPXeRoYQ7tV8JK3ArgO2anv8qrypaVzXExLASr7wd_hb" alt="My Boo 2">
+                <div class="movie-info">
+                    <h3>My Boo 2</h3>
+                    <div class="movie-details"><i class="fa-solid fa-star"></i> 9.2 Rating</div>
                 </div>
             </a>
         </div>
@@ -118,8 +155,7 @@
     <nav>
         <a href="#" class="active"><i class="fa-solid fa-house"></i><span>Home</span></a>
         <a href="#"><i class="fa-solid fa-compass"></i><span>Discover</span></a>
-        <a href="#"><i class="fa-solid fa-plus"></i><span>Create</span></a>
-        <a href="#"><i class="fa-solid fa-heart"></i><span>Favorite</span></a>
+        <a href="#"><i class="fa-solid fa-bookmark"></i><span>Watchlist</span></a>
         <a href="#"><i class="fa-solid fa-user"></i><span>Profile</span></a>
     </nav>
 
