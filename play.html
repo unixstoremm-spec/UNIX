@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playing Movie - UNIX STREAM</title>
+    <style>
+        body { margin: 0; background: #000; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        .player-container { width: 90%; max-width: 1000px; position: relative; padding-bottom: 56.25%; }
+        iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 10px; }
+        .back-btn { position: absolute; top: -50px; left: 0; color: #fdd835; text-decoration: none; font-family: sans-serif; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="player-container">
+        <a href="index.html" class="back-btn">← Back to Home</a>
+        <iframe id="videoPlayer" src="" allowfullscreen></iframe>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const videoSrc = urlParams.get('url');
+        if(videoSrc) {
+            document.getElementById('videoPlayer').src = videoSrc;
+        }
+    </script>
+</body>
+</html>
