@@ -3,26 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Playing Movie - UNIX STREAM</title>
+    <title>UNIX Player - Smooth Streaming</title>
+    <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
     <style>
-        body { margin: 0; background: #000; display: flex; justify-content: center; align-items: center; height: 100vh; }
-        .player-container { width: 90%; max-width: 1000px; position: relative; padding-bottom: 56.25%; }
-        iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 10px; }
-        .back-btn { position: absolute; top: -50px; left: 0; color: #fdd835; text-decoration: none; font-family: sans-serif; font-weight: bold; }
+        body { margin: 0; background: #000; color: white; font-family: sans-serif; }
+        .player-wrapper { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+        .video-container { width: 95%; max-width: 1100px; box-shadow: 0 0 30px rgba(253, 216, 53, 0.2); border-radius: 10px; overflow: hidden; }
+        .back-nav { width: 95%; max-width: 1100px; margin-bottom: 15px; }
+        .back-btn { color: #fdd835; text-decoration: none; font-weight: bold; font-size: 18px; }
+        /* Custom Player Theme */
+        .video-js .vjs-big-play-button { background-color: #fdd835; color: #000; border-radius: 50%; width: 2em; height: 2em; line-height: 2em; margin-top: -1em; margin-left: -1em; }
+        .video-js .vjs-control-bar { background-color: rgba(18, 19, 20, 0.8); }
+        .vjs-play-progress { background-color: #fdd835 !important; }
     </style>
 </head>
 <body>
-    <div class="player-container">
-        <a href="index.html" class="back-btn">← Back to Home</a>
-        <iframe id="videoPlayer" src="" allowfullscreen></iframe>
-    </div>
 
-    <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const videoSrc = urlParams.get('url');
-        if(videoSrc) {
-            document.getElementById('videoPlayer').src = videoSrc;
-        }
-    </script>
+<div class="player-wrapper">
+    <div class="back-nav">
+        <a href="index.html" class="back-btn">← Back to Movies</a>
+    </div>
+    
+    <div class="video-container">
+        <video
+            id="unix-player"
+            class="video-js vjs-big-play-centered vjs-fluid"
+            controls
+            preload="auto"
+            data-setup='{}'>
+            <p class="vjs-no-js">To view this video please enable JavaScript</p>
+        </video>
+    </div>
+</div>
+
+<script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    let videoUrl = urlParams.get('url');
+
+    if (videoUrl) {
+        // အကယ်၍ Link က Bot ရဲ့ Stream link ဖြစ်နေရင် (Direct ဖတ်လို့ရအောင် ပြင်ပေးခြင်း)
+        // ဥပမာ- /stream/16 ကို /dl/16 လို့ ပြောင်းရင် ပိုမြန်တတ်ပါတယ် (Bot အပေါ်မူတည်သည်)
+        const player = videojs('unix-player');
+        player.src({
+            src: videoUrl,
+            type: 'video/mp4' // ဖိုင်အမျိုးအစားကို Auto သိအောင် ထားပေးခြင်း
+        });
+
+        // Buffering ကို ပိုကောင်းစေရန် Settings များ
+        player.ready(function() {
+            this.play(); // Auto Play
+        });
+    }
+</script>
+
 </body>
 </html>
