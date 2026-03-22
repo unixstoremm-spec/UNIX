@@ -3,106 +3,257 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UNIX STREAM - Home</title>
+    <title>UNIX STREAM - Disney+ Golden Edition</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background: #0b0c0d; color: white; overflow-x: hidden; }
-        .container { display: flex; min-height: 100vh; }
+        /* --- Core Styles (Disney+ Inspired) --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Avenir-World', 'Segoe UI', Helvetica, Arial, sans-serif; }
         
-        /* Sidebar */
-        nav { width: 240px; background: #121314; padding: 30px 20px; position: fixed; height: 100vh; border-right: 1px solid #222; transition: 0.3s; z-index: 1000; }
-        .logo { color: #fdd835; font-size: 26px; font-weight: bold; margin-bottom: 50px; display: block; text-decoration: none; letter-spacing: 1px; }
-        .nav-links a { display: block; color: #888; padding: 15px 0; text-decoration: none; font-size: 18px; transition: 0.3s; }
-        .nav-links a:hover, .nav-links a.active { color: #fdd835; }
-        .nav-links i { margin-right: 15px; width: 20px; }
-
-        /* Main Content */
-        main { margin-left: 240px; width: calc(100% - 240px); transition: 0.3s; }
-        header { display: flex; justify-content: flex-end; padding: 20px 40px; }
-        .search-box { background: rgba(255,255,255,0.05); border: 1.5px solid #fdd835; border-radius: 25px; padding: 10px 20px; width: 300px; color: white; outline: none; transition: 0.3s; }
-        .search-box:focus { background: rgba(255,255,255,0.1); width: 350px; }
-
-        /* Hero Banner */
-        .hero-section { padding: 0 40px 40px 40px; }
-        .hero { 
-            height: 500px; 
-            border-radius: 30px; 
-            background: linear-gradient(to right, rgba(11,12,13,0.95) 30%, rgba(11,12,13,0.2) 70%, transparent 100%), 
-            url('https://ntvb.tmsimg.com/assets/p28448171_v_h8_ad.jpg?w=1280&h=720'); 
-            background-size: cover; 
-            background-position: center; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            padding: 60px;
+        body { 
+            background-color: #040714; /* Disney+ Dark Blue-Black */
+            color: #f9f9f9;
+            overflow-x: hidden;
+            letter-spacing: 0.5px;
         }
-        .hero h1 { font-size: 50px; margin-bottom: 15px; color: #fff; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
-        .hero p { max-width: 500px; color: #ccc; margin-bottom: 25px; line-height: 1.6; font-size: 16px; }
-        .btn-watch { background: #fdd835; color: black; padding: 14px 40px; border-radius: 30px; text-decoration: none; font-weight: bold; width: fit-content; transition: 0.3s; display: flex; align-items: center; gap: 10px; }
-        .btn-watch:hover { transform: scale(1.05); background: #ffeb3b; }
 
-        /* Movie Grid */
-        .content-area { padding: 0 40px 40px 40px; }
-        .section-title { font-size: 22px; margin-bottom: 25px; color: #fdd835; font-weight: 600; }
-        .movie-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 30px; }
-        .movie-card { background: #121314; border-radius: 20px; overflow: hidden; transition: 0.3s; text-decoration: none; color: white; border: 1px solid #222; }
-        .movie-card:hover { transform: translateY(-10px); border-color: #fdd835; }
-        .movie-card img { width: 100%; height: 280px; object-fit: cover; }
-        .movie-card h3 { padding: 15px; font-size: 15px; text-align: center; font-weight: 500; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
 
-        /* Responsive Fixes */
-        @media (max-width: 1024px) {
-            nav { width: 80px; padding: 30px 10px; text-align: center; }
-            .logo, .nav-links span { display: none; }
-            main { margin-left: 80px; width: calc(100% - 80px); }
-            header { padding: 20px; }
+        /* --- Header & Navigation --- */
+        header {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            height: 70px;
+            background-color: rgba(4, 7, 20, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 60px;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(253, 216, 53, 0.1);
+        }
+
+        .logo { 
+            color: #fdd835; /* Golden Yellow Logo */
+            font-size: 28px; 
+            font-weight: 900; 
+            letter-spacing: 1.5px;
+            text-shadow: 0 0 10px rgba(253, 216, 53, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #f9f9f9;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        .nav-item i { font-size: 18px; color: #aaa; transition: 0.3s; }
+
+        .nav-item:hover { color: #fdd835; }
+        .nav-item:hover i { color: #fdd835; transform: scale(1.1); }
+
+        /* Underline effect */
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            width: 0; height: 2px;
+            bottom: -5px; left: 0;
+            background-color: #fdd835;
+            transition: 0.3s;
+        }
+        .nav-item:hover::after { width: 100%; }
+
+        .search-box {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(253, 216, 53, 0.2);
+            border-radius: 20px;
+            padding: 8px 15px;
+            color: white;
+            outline: none;
+            width: 250px;
+            transition: 0.3s;
+        }
+        .search-box:focus { border-color: #fdd835; width: 300px; background: rgba(255,255,255,0.1); }
+
+        /* --- Main Content Area --- */
+        main { padding-top: 100px; padding-bottom: 50px; }
+
+        /* --- Hero Carousel/Banner (Scream 7) --- */
+        .hero-container {
+            padding: 0 60px;
+            margin-bottom: 40px;
+        }
+        .hero {
+            height: 80vh;
+            border-radius: 20px;
+            background: linear-gradient(to right, rgba(4, 7, 20, 1) 10%, rgba(4, 7, 20, 0.6) 40%, transparent 80%),
+                        url('https://ntvb.tmsimg.com/assets/p28448171_v_h8_ad.jpg?w=1280&h=720');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            padding: 80px;
+            border: 1px solid rgba(253, 216, 53, 0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .hero-content { max-width: 600px; }
+        .hero h1 { font-size: 60px; font-weight: 800; margin-bottom: 15px; color: #fff; }
+        .hero p { font-size: 18px; color: #ccc; margin-bottom: 30px; line-height: 1.6; }
+        
+        .btn-watch { 
+            background: #fdd835; /* Golden Yellow Button */
+            color: #040714;
+            padding: 15px 35px;
+            border-radius: 30px;
+            font-weight: 800;
+            font-size: 16px;
+            text-transform: uppercase;
+            display: inline-flex; align-items: center; gap: 10px;
+            box-shadow: 0 4px 15px rgba(253, 216, 53, 0.3);
+        }
+        .btn-watch:hover { background: #fff; transform: scale(1.05); box-shadow: 0 6px 20px rgba(253, 216, 53, 0.5); }
+
+        /* --- Brand Tiles (Disney+ Icon Style) --- */
+        .brand-container {
+            padding: 0 60px;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+        .brand-tile {
+            background: linear-gradient(135deg, #1a1d29 0%, #040714 100%);
+            border: 2px solid rgba(253, 216, 53, 0.1);
+            border-radius: 15px;
+            height: 120px;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 24px; font-weight: 800; color: #f9f9f9;
+            text-transform: uppercase; letter-spacing: 2px;
+            position: relative; overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        .brand-tile:hover {
+            transform: scale(1.05);
+            border-color: rgba(253, 216, 53, 0.8);
+            box-shadow: 0 15px 30px rgba(253, 216, 53, 0.2);
+        }
+        /* Glowing effect on hover */
+        .brand-tile::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(253, 216, 53, 0.2) 0%, transparent 70%);
+            opacity: 0; transition: 0.3s;
+        }
+        .brand-tile:hover::after { opacity: 1; }
+
+        /* --- Movie Rows --- */
+        .row-container { padding: 0 60px; margin-bottom: 40px; }
+        .row-title { font-size: 22px; font-weight: 700; margin-bottom: 20px; color: #f9f9f9; display: flex; align-items: center; gap: 10px; }
+        .row-title::before { content: ''; width: 4px; height: 22px; background-color: #fdd835; border-radius: 2px; }
+
+        .movie-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 25px;
+        }
+        .movie-card {
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid rgba(253, 216, 53, 0);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        .movie-card img { width: 100%; height: 330px; object-fit: cover; }
+        
+        /* Disney+ Hover Effect: Card lifts and glows */
+        .movie-card:hover {
+            transform: scale(1.05) translateY(-5px);
+            border-color: rgba(253, 216, 53, 0.8);
+            box-shadow: 0 20px 40px rgba(253, 216, 53, 0.2);
+        }
+
+        .card-overlay {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(4, 7, 20, 1), transparent);
+            opacity: 0; transition: 0.3s;
+        }
+        .movie-card:hover .card-overlay { opacity: 1; }
+        .card-overlay h3 { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 5px; }
+        .card-overlay span { font-size: 12px; color: #fdd835; font-weight: 600; }
+
+        /* --- Responsive Fixes --- */
+        @media (max-width: 1200px) {
+            header, .hero-container, .brand-container, .row-container { padding: 0 30px; }
+            .hero { padding: 60px; height: 70vh; }
+            .hero h1 { font-size: 45px; }
+        }
+
+        @media (max-width: 992px) {
+            .nav-links { gap: 15px; }
+            .nav-item { font-size: 13px; gap: 5px; }
+            .search-box { width: 180px; }
+            .brand-container { grid-template-columns: repeat(3, 1fr); gap: 15px; }
+            .hero h1 { font-size: 35px; }
+            .hero p { font-size: 15px; }
         }
 
         @media (max-width: 768px) {
-            nav { display: none; } /* ဖုန်းမှာ sidebar ဖျောက်မယ် */
-            main { margin-left: 0; width: 100%; }
-            header { justify-content: center; }
-            .search-box { width: 90%; }
-            .hero-section { padding: 10px; }
+            header { padding: 0 20px; justify-content: center; flex-direction: column; height: auto; padding: 15px; gap: 10px; }
+            .nav-links { width: 100%; justify-content: center; flex-wrap: wrap; }
+            .search-box { width: 100%; }
+            main { padding-top: 130px; }
+            .hero-container { padding: 0 10px; }
             .hero { 
-                height: auto; 
-                min-height: 450px;
-                padding: 30px 20px; 
-                border-radius: 20px;
-                background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(11,12,13,1)), 
+                height: auto; min-height: 400px;
+                padding: 30px; border-radius: 15px;
+                background: linear-gradient(to bottom, rgba(4, 7, 20, 0.2), rgba(4, 7, 20, 1)),
                             url('https://ntvb.tmsimg.com/assets/p28448171_v_h8_ad.jpg?w=1280&h=720');
-                background-size: cover;
                 background-position: top center;
-                justify-content: flex-end; /* စာသားကို အောက်ပို့ပေးမယ် */
+                justify-content: flex-end; text-align: center;
             }
-            .hero h1 { font-size: 32px; text-align: center; }
-            .hero p { font-size: 14px; text-align: center; margin: 0 auto 20px auto; }
-            .btn-watch { margin: 0 auto; width: 100%; justify-content: center; }
+            .hero-content { margin: 0 auto; }
+            .hero h1 { font-size: 28px; }
+            .btn-watch { width: 100%; justify-content: center; }
+            .brand-container { grid-template-columns: repeat(2, 1fr); padding: 0 20px; }
+            .brand-tile { height: 90px; font-size: 18px; }
+            .row-container { padding: 0 20px; }
             .movie-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
-            .content-area { padding: 20px; }
+            .movie-card img { height: 250px; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <nav>
-            <a href="#" class="logo">UNIX</a>
-            <div class="nav-links">
-                <a href="#" class="active"><i class="fa-solid fa-house"></i> <span>Home</span></a>
-                <a href="#"><i class="fa-solid fa-film"></i> <span>Movies</span></a>
-                <a href="#"><i class="fa-solid fa-bookmark"></i> <span>Favorites</span></a>
-                <a href="#"><i class="fa-solid fa-gear"></i> <span>Settings</span></a>
-            </div>
+
+    <header>
+        <a href="#" class="logo">UNIX</a>
+        <nav class="nav-links">
+            <a href="#" class="nav-item active"><i class="fa-solid fa-house"></i> <span>Home</span></a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-magnifying-glass"></i> <span>Search</span></a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-plus"></i> <span>Watchlist</span></a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-star"></i> <span>Originals</span></a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-film"></i> <span>Movies</span></a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-tv"></i> <span>Series</span></a>
         </nav>
+        <input type="text" class="search-box" placeholder="Search movies...">
+    </header>
 
-        <main>
-            <header>
-                <input type="text" class="search-box" placeholder="Search movies...">
-            </header>
-
-            <div class="hero-section">
-                <div class="hero">
+    <main>
+        <div class="hero-container">
+            <div class="hero">
+                <div class="hero-content">
                     <h1>Scream 7 (2026)</h1>
                     <p>When a new Ghostface killer emerges in the town where Sidney Prescott has built a new life, her darkest fears are realized as her daughter becomes the next target.</p>
                     <a href="https://unixstoremm-my-test-bot.hf.space/stream/23?hash=4be59b" class="btn-watch">
@@ -110,27 +261,53 @@
                     </a>
                 </div>
             </div>
+        </div>
 
-            <div class="content-area">
-                <h2 class="section-title">Popular Movies</h2>
-                <div class="movie-grid">
-                    <a href="https://unixstoremm-my-test-bot.hf.space/stream/21?hash=8f4813" class="movie-card">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpBagNEK94f2_Wq1CniKY2qMvNnOgiN6ItrDhOXLkdAjz9n6ZJk3nkUcbEzgXPSuytv5YVnnbtVlbmBnQOiV_n3wqIwjMd015qODAl&s=10" alt="Garfield">
+        <div class="brand-container">
+            <a href="#" class="brand-tile" style="color: #ed1d24;">Marvel</a> <a href="#" class="brand-tile" style="color: #0095da;">Pixar</a>  <a href="#" class="brand-tile" style="color: #fdd835;">UNIX</a>   <a href="#" class="brand-tile" style="color: #fff;">Star Wars</a> <a href="#" class="brand-tile" style="color: #007236;">Nat Geo</a>  </div>
+
+        <div class="row-container">
+            <h2 class="row-title">Trending Now</h2>
+            <div class="movie-grid">
+                <a href="https://unixstoremm-my-test-bot.hf.space/stream/21?hash=8f4813" class="movie-card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpBagNEK94f2_Wq1CniKY2qMvNnOgiN6ItrDhOXLkdAjz9n6ZJk3nkUcbEzgXPSuytv5YVnnbtVlbmBnQOiV_n3wqIwjMd015qODAl&s=10" alt="Garfield">
+                    <div class="card-overlay">
                         <h3>The Garfield Movie</h3>
-                    </a>
-                    
-                    <a href="https://unixstoremm-my-test-bot.hf.space/stream/20?hash=e30e9e" class="movie-card">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJrVOTQrlzEGAHyyLreyxbQFFk-pFWcO1nIkE3dbAf3z6E9gTE2_kBM13Y5fvCIiC60FKjbQ&s=10" alt="The Lost Bus">
+                        <span>Animation | Comedy</span>
+                    </div>
+                </a>
+                
+                <a href="https://unixstoremm-my-test-bot.hf.space/stream/20?hash=e30e9e" class="movie-card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJrVOTQrlzEGAHyyLreyxbQFFk-pFWcO1nIkE3dbAf3z6E9gTE2_kBM13Y5fvCIiC60FKjbQ&s=10" alt="The Lost Bus">
+                    <div class="card-overlay">
                         <h3>The Lost Bus</h3>
-                    </a>
+                        <span>Drama | Thriller</span>
+                    </div>
+                </a>
 
-                    <a href="https://unixstoremm-my-test-bot.hf.space/stream/22?hash=6a6ed7" class="movie-card">
-                        <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRnBxg1VPXeRoYQ7tV8JK3ArgO2anv8qrypaVzXExLASr7wd_hb" alt="My Boo 2">
+                <a href="https://unixstoremm-my-test-bot.hf.space/stream/22?hash=6a6ed7" class="movie-card">
+                    <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRnBxg1VPXeRoYQ7tV8JK3ArgO2anv8qrypaVzXExLASr7wd_hb" alt="My Boo 2">
+                    <div class="card-overlay">
                         <h3>My Boo 2</h3>
-                    </a>
-                </div>
+                        <span>Horror | Comedy</span>
+                    </div>
+                </a>
             </div>
-        </main>
-    </div>
+        </div>
+
+        <div class="row-container">
+            <h2 class="row-title">UNIX Originals</h2>
+            <div class="movie-grid">
+                <a href="#" class="movie-card">
+                    <img src="https://ntvb.tmsimg.com/assets/p28448171_v_h8_ad.jpg?w=1280&h=720" alt="Scream 7">
+                    <div class="card-overlay">
+                        <h3>Scream 7 (2026)</h3>
+                        <span>Horror | Mystery</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+    </main>
 </body>
 </html>
