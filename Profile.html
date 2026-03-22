@@ -8,45 +8,26 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <header>
-        <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i></a>
-        <div class="page-title">My Profile</div>
-        <div style="width: 20px;"></div>
+        <a href="index.html" style="color:white;"><i class="fa-solid fa-arrow-left"></i></a>
+        <div class="page-title">Profile</div>
+        <i class="fa-solid fa-gear header-icons"></i>
     </header>
 
     <main>
-        <section class="profile-header">
-            <div class="avatar-box">
+        <div class="profile-box">
+            <div class="avatar-circle">
                 <img src="https://i.pinimg.com/736x/a6/58/32/a65832155622ac173337f5ee8838d046.jpg">
-                <div class="cam-icon"><i class="fa-solid fa-camera"></i></div>
             </div>
             <h2>UNIX User</h2>
-            <p style="color: #666; font-size: 13px;">unixstreamer@mail.com</p>
+            <p style="color:#666; font-size:13px;">unixstreamer@mail.com</p>
+        </div>
 
-            <div class="stats-row">
-                <div class="stat-box"><h5>12</h5><p>Watchlist</p></div>
-                <div class="stat-box"><h5>45</h5><p>Watched</p></div>
-                <div class="stat-box"><h5>1.2k</h5><p>Points</p></div>
-            </div>
-        </section>
-
-        <div class="menu-container">
-            <div class="menu-group">
-                <a href="#" class="menu-item">
-                    <div class="menu-icon"><i class="fa-solid fa-user-pen"></i></div>
-                    <span class="menu-text">Edit Profile</span>
-                    <i class="fa-solid fa-chevron-right" style="font-size: 10px; color: #444;"></i>
-                </a>
-                <a href="#" class="menu-item">
-                    <div class="menu-icon"><i class="fa-solid fa-gear"></i></div>
-                    <span class="menu-text">Settings</span>
-                    <i class="fa-solid fa-chevron-right" style="font-size: 10px; color: #444;"></i>
-                </a>
-                <a href="#" class="menu-item" style="color: #E21B23;">
-                    <div class="menu-icon" style="color: #E21B23;"><i class="fa-solid fa-sign-out-alt"></i></div>
-                    <span class="menu-text">Logout</span>
-                </a>
-            </div>
+        <div class="menu-list">
+            <a href="#" class="menu-item"><span>Edit Profile</span><i class="fa-solid fa-chevron-right"></i></a>
+            <a href="#" class="menu-item"><span>My Watchlist</span><i class="fa-solid fa-chevron-right"></i></a>
+            <a href="#" class="menu-item" style="color:#ff4444;"><span>Logout</span><i class="fa-solid fa-sign-out-alt"></i></a>
         </div>
     </main>
 
@@ -56,5 +37,6 @@
         <a href="#"><i class="fa-solid fa-bookmark"></i><span>Watchlist</span></a>
         <a href="Profile.html" class="active"><i class="fa-solid fa-user"></i><span>Profile</span></a>
     </nav>
+
 </body>
 </html>
