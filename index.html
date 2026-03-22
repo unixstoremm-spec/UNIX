@@ -3,52 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UNIX STREAM - TVMOON Style</title>
+    <title>UNIX STREAM - Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         body { background: #0b0c0d; color: white; overflow-x: hidden; }
         .container { display: flex; min-height: 100vh; }
         
         /* Sidebar */
-        nav { width: 160px; background: #121314; padding: 30px 20px; position: fixed; height: 100vh; border-right: 1px solid #222; transition: 0.3s; z-index: 100; }
-        .logo { color: #fdd835; font-size: 24px; font-weight: bold; margin-bottom: 50px; display: block; text-decoration: none; }
+        nav { width: 240px; background: #121314; padding: 30px 20px; position: fixed; height: 100vh; border-right: 1px solid #222; transition: 0.3s; z-index: 1000; }
+        .logo { color: #fdd835; font-size: 26px; font-weight: bold; margin-bottom: 50px; display: block; text-decoration: none; letter-spacing: 1px; }
         .nav-links a { display: block; color: #888; padding: 15px 0; text-decoration: none; font-size: 18px; transition: 0.3s; }
         .nav-links a:hover, .nav-links a.active { color: #fdd835; }
         .nav-links i { margin-right: 15px; width: 20px; }
 
         /* Main Content */
-        main { margin-left: 260px; width: calc(100% - 260px); padding: 40px; }
-        header { display: flex; justify-content: flex-end; margin-bottom: 30px; }
-        .search-box { background: rgba(255,255,255,0.05); border: 1.5px solid #fdd835; border-radius: 25px; padding: 8px 20px; width: 300px; color: white; outline: none; }
+        main { margin-left: 240px; width: calc(100% - 240px); transition: 0.3s; }
+        header { display: flex; justify-content: flex-end; padding: 20px 40px; }
+        .search-box { background: rgba(255,255,255,0.05); border: 1.5px solid #fdd835; border-radius: 25px; padding: 10px 20px; width: 300px; color: white; outline: none; transition: 0.3s; }
+        .search-box:focus { background: rgba(255,255,255,0.1); width: 350px; }
 
         /* Hero Banner */
-        .hero { height: 450px; border-radius: 30px; background: linear-gradient(to right, rgba(0,0,0,0.9), transparent), 
-        url('https://ntvb.tmsimg.com/assets/p28448171_v_h8_ad.jpg?w=1280&h=720'); background-size: cover; background-position: center; display: flex; flex-direction: column; justify-content: center; padding: 60px; margin-bottom: 40px; }
-        .hero h1 { font-size: 50px; margin-bottom: 15px; }
-        .hero p { max-width: 500px; color: #ccc; margin-bottom: 25px; line-height: 1.6; }
-        .btn-watch { background: #fdd835; color: black; padding: 12px 35px; border-radius: 30px; text-decoration: none; font-weight: bold; width: fit-content; transition: 0.3s; }
-        .btn-watch:hover { transform: scale(1.05); }
+        .hero-section { padding: 0 40px 40px 40px; }
+        .hero { 
+            height: 500px; 
+            border-radius: 30px; 
+            background: linear-gradient(to right, rgba(11,12,13,0.95) 30%, rgba(11,12,13,0.2) 70%, transparent 100%), 
+            url('https://ntvb.tmsimg.com/assets/p28448171_v_h8_ad.jpg?w=1280&h=720'); 
+            background-size: cover; 
+            background-position: center; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            padding: 60px;
+        }
+        .hero h1 { font-size: 50px; margin-bottom: 15px; color: #fff; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+        .hero p { max-width: 500px; color: #ccc; margin-bottom: 25px; line-height: 1.6; font-size: 16px; }
+        .btn-watch { background: #fdd835; color: black; padding: 14px 40px; border-radius: 30px; text-decoration: none; font-weight: bold; width: fit-content; transition: 0.3s; display: flex; align-items: center; gap: 10px; }
+        .btn-watch:hover { transform: scale(1.05); background: #ffeb3b; }
 
         /* Movie Grid */
-        .section-title { font-size: 22px; margin-bottom: 25px; color: #fdd835; }
-        .movie-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 25px; }
-        .movie-card { background: #121314; border-radius: 20px; overflow: hidden; transition: 0.3s; cursor: pointer; text-decoration: none; color: white; }
-        .movie-card:hover { transform: translateY(-10px); }
-        .movie-card img { width: 100%; height: 260px; object-fit: cover; }
-        .movie-card h3 { padding: 12px; font-size: 14px; text-align: center; }
+        .content-area { padding: 0 40px 40px 40px; }
+        .section-title { font-size: 22px; margin-bottom: 25px; color: #fdd835; font-weight: 600; }
+        .movie-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 30px; }
+        .movie-card { background: #121314; border-radius: 20px; overflow: hidden; transition: 0.3s; text-decoration: none; color: white; border: 1px solid #222; }
+        .movie-card:hover { transform: translateY(-10px); border-color: #fdd835; }
+        .movie-card img { width: 100%; height: 280px; object-fit: cover; }
+        .movie-card h3 { padding: 15px; font-size: 15px; text-align: center; font-weight: 500; }
 
-        /* Responsive */
+        /* Responsive Fixes */
         @media (max-width: 1024px) {
             nav { width: 80px; padding: 30px 10px; text-align: center; }
             .logo, .nav-links span { display: none; }
-            main { margin-left: 80px; width: calc(100% - 80px); padding: 20px; }
+            main { margin-left: 80px; width: calc(100% - 80px); }
+            header { padding: 20px; }
         }
-        @media (max-width: 600px) {
-            nav { display: none; }
+
+        @media (max-width: 768px) {
+            nav { display: none; } /* ဖုန်းမှာ sidebar ဖျောက်မယ် */
             main { margin-left: 0; width: 100%; }
-            .hero h1 { font-size: 30px; }
-            .movie-grid { grid-template-columns: repeat(2, 1fr); }
+            header { justify-content: center; }
+            .search-box { width: 90%; }
+            .hero-section { padding: 10px; }
+            .hero { 
+                height: auto; 
+                min-height: 450px;
+                padding: 30px 20px; 
+                border-radius: 20px;
+                background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(11,12,13,1)), 
+                            url('https://ntvb.tmsimg.com/assets/p28448171_v_h8_ad.jpg?w=1280&h=720');
+                background-size: cover;
+                background-position: top center;
+                justify-content: flex-end; /* စာသားကို အောက်ပို့ပေးမယ် */
+            }
+            .hero h1 { font-size: 32px; text-align: center; }
+            .hero p { font-size: 14px; text-align: center; margin: 0 auto 20px auto; }
+            .btn-watch { margin: 0 auto; width: 100%; justify-content: center; }
+            .movie-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            .content-area { padding: 20px; }
         }
     </style>
 </head>
@@ -69,31 +101,35 @@
                 <input type="text" class="search-box" placeholder="Search movies...">
             </header>
 
-            <div class="hero">
-                <h1>Scream 7 (2026)</h1>
-                <p>When a new Ghostface killer emerges in the town where Sidney Prescott has built a new life,
-                    her darkest fears are realized as her daughter becomes the next target.</p>
-                <a href="https://unixstoremm-my-test-bot.hf.space/stream/23?hash=4be59b" class="btn-watch">
-    <i class="fa-solid fa-play"></i> Watch Now </a>
+            <div class="hero-section">
+                <div class="hero">
+                    <h1>Scream 7 (2026)</h1>
+                    <p>When a new Ghostface killer emerges in the town where Sidney Prescott has built a new life, her darkest fears are realized as her daughter becomes the next target.</p>
+                    <a href="https://unixstoremm-my-test-bot.hf.space/stream/23?hash=4be59b" class="btn-watch">
+                        <i class="fa-solid fa-play"></i> Watch Now
+                    </a>
+                </div>
             </div>
 
-            <h2 class="section-title">Popular Movies</h2>
-            <div class="movie-grid">
-                <a href="https://unixstoremm-my-test-bot.hf.space/stream/21?hash=8f4813" class="movie-card">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpBagNEK94f2_Wq1CniKY2qMvNnOgiN6ItrDhOXLkdAjz9n6ZJk3nkUcbEzgXPSuytv5YVnnbtVlbmBnQOiV_n3wqIwjMd015qODAl&s=10" alt="Garfield">
-                    <h3>The Garfield Movie 1 </h3>
-                </a>
-                <a href="https://unixstoremm-my-test-bot.hf.space/stream/20?hash=e30e9e" class="movie-card">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJrVOTQrlzEGAHyyLreyxbQFFk-pFWcO1nIkE3dbAf3z6E9gTE2_kBM13Y5fvCIiC60FKjbQ&s=10" alt="Home">
-                    <h3>The Lost Bus</h3>
-                </a>
+            <div class="content-area">
+                <h2 class="section-title">Popular Movies</h2>
+                <div class="movie-grid">
+                    <a href="https://unixstoremm-my-test-bot.hf.space/stream/21?hash=8f4813" class="movie-card">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpBagNEK94f2_Wq1CniKY2qMvNnOgiN6ItrDhOXLkdAjz9n6ZJk3nkUcbEzgXPSuytv5YVnnbtVlbmBnQOiV_n3wqIwjMd015qODAl&s=10" alt="Garfield">
+                        <h3>The Garfield Movie</h3>
+                    </a>
+                    
+                    <a href="https://unixstoremm-my-test-bot.hf.space/stream/20?hash=e30e9e" class="movie-card">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJrVOTQrlzEGAHyyLreyxbQFFk-pFWcO1nIkE3dbAf3z6E9gTE2_kBM13Y5fvCIiC60FKjbQ&s=10" alt="The Lost Bus">
+                        <h3>The Lost Bus</h3>
+                    </a>
 
-                <a href="https://unixstoremm-my-test-bot.hf.space/stream/22?hash=6a6ed7" class="movie-card">
-                    <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRnBxg1VPXeRoYQ7tV8JK3ArgO2anv8qrypaVzXExLASr7wd_hb" alt="Home">
-                    <h3>My Boo 2</h3>
-                </a>
-                
+                    <a href="https://unixstoremm-my-test-bot.hf.space/stream/22?hash=6a6ed7" class="movie-card">
+                        <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRnBxg1VPXeRoYQ7tV8JK3ArgO2anv8qrypaVzXExLASr7wd_hb" alt="My Boo 2">
+                        <h3>My Boo 2</h3>
+                    </a>
                 </div>
+            </div>
         </main>
     </div>
 </body>
