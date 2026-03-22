@@ -3,186 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UNIX STREAM - My Collection</title>
+    <title>UNIX STREAM - Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        /* --- Reference ပုံအတိုင်း Clean & Dark Theme --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', 'Segoe UI', sans-serif; }
-        body { background-color: #0c0c0d; color: #f9f9f9; overflow-x: hidden; padding-bottom: 100px; }
-
-        /* Header (Back + Title + Bell) - Reference ပုံအတိုင်း */
-        header { padding: 30px 20px; display: flex; justify-content: space-between; align-items: center; background-color: #0c0c0d; position: sticky; top: 0; z-index: 1000; }
-        .back-btn { color: #f9f9f9; font-size: 20px; text-decoration: none; }
-        .page-title { font-size: 18px; font-weight: 600; text-align: center; flex-grow: 1; text-transform: capitalize; }
-        .notification-btn { color: #f9f9f9; font-size: 20px; text-decoration: none; position: relative; }
-        .notification-badge { position: absolute; top: -5px; right: -5px; width: 10px; height: 10px; background: #E21B23; border-radius: 50%; border: 2px solid #0c0c0d; }
-
-        /* Main Content Area */
-        main { padding: 20px; }
-
-        /* --- Featured "Scream 7" Collection Card (Big Poster) --- */
-        .featured-container { margin-bottom: 40px; }
-        .featured-card {
-            width: 100%; height: 500px; border-radius: 30px;
-            /* Reference ပုံအတိုင်း အောက်ကနေ အမည်းရောင် မှေးမှိန်သွားသည့် Gradient */
-            background: linear-gradient(to top, rgba(12,12,13,1) 10%, rgba(12,12,13,0.6) 30%, transparent 60%),
-                        url('https://ntvb.tmsimg.com/assets/p28448171_v_h8_ad.jpg?w=1280&h=720'); /* သင့် Scream 7 ပုံ */
-            background-size: cover; background-position: center;
-            position: relative; overflow: hidden;
-            display: flex; flex-direction: column; justify-content: flex-end; padding: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-            border: 1px solid rgba(255,255,255,0.08);
-        }
-        .featured-title { font-size: 20px; font-weight: 700; color: white; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px; }
-        .featured-desc { font-size: 13px; color: #ccc; margin-bottom: 20px; line-height: 1.5; max-width: 400px; }
-        
-        /* Reference ပုံထဲက Stats Icons (သင့်အတွက် အဝါရောင်သုံးထားသည်) */
-        .featured-stats { color: #fdd835; font-size: 12px; font-weight: 600; display: flex; align-items: center; gap: 15px; }
-        .featured-stats i { color: #888; margin-right: 5px; }
-
-        /* --- Movie Grid (Collection List) --- */
-        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding: 0 5px; }
-        .section-header h2 { font-size: 18px; font-weight: 700; text-transform: capitalize; }
-        .section-header a { color: #888; font-size: 13px; font-weight: 500; text-decoration: none; }
-
-        .movie-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr); /* ဖုန်းမှာ ၂ ကတ်စီပြမယ် */
-            gap: 15px;
-            align-items: start; /* အပေါ်ကနေ တန်းစီ ညီနေအောင် လုပ်တာပါ */
-        }
-
-        .movie-card {
-            background: #121314;
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: 0.3s;
-            text-decoration: none;
-            color: #f9f9f9;
-            display: flex; /* Flexbox သုံးပြီး စာသားတွေကို အောက်မှာ ညီအောင်စီမယ် */
-            flex-direction: column;
-            height: 100%; /* ကတ်အမြင့်ချင်း တူအောင် လုပ်တာပါ */
-        }
-        .movie-card:hover { transform: translateY(-5px); border-color: #fdd835; }
-        
-        /* ပုံမူရင်း size မညီရင်တောင် အမြင့် 240px မှာ object-fit နဲ့ ဖြတ်ညှိပေးမယ် */
-        .movie-card img { width: 100%; height: 240px; object-fit: cover; }
-        
-        .movie-info { padding: 12px; flex-grow: 1; /* စာသားတွေကို ကတ်အောက်ခြေအထိ ဆွဲဆန့်ပေးမယ် */ display: flex; flex-direction: column; justify-content: space-between; }
-        .movie-info h3 { font-size: 13px; font-weight: 600; margin-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        
-        /* Reference ပုံထဲကလို သေးငယ်သော အညွှန်းစာသားများ */
-        .movie-details { color: #888; font-size: 11px; font-weight: 500; display: flex; align-items: center; gap: 6px; text-transform: uppercase; }
-        .movie-details i { color: #fdd835; }
-
-        /* --- Bottom Navigation Bar (Floating Style - Reference ပုံအတိုင်း) --- */
-        nav {
-            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            width: 90%; max-width: 400px;
-            background: rgba(20, 21, 22, 0.95);
-            backdrop-filter: blur(5px);
-            height: 70px; border-radius: 35px;
-            display: flex; justify-content: space-around; align-items: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            z-index: 1000; border: 1px solid rgba(255,255,255,0.08);
-        }
-        nav a { color: #888; font-size: 20px; transition: 0.3s; display: flex; flex-direction: column; align-items: center; gap: 5px; text-decoration: none; }
-        nav a.active { color: #f9f9f9; }
-        nav a span { font-size: 10px; font-weight: 500; text-transform: capitalize; opacity: 0.8; }
-
-        /* Responsive Fixes */
-        @media (min-width: 600px) {
-            .movie-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); } /* Tablet မှာ ကတ်အရေအတွက် ချိန်ပေးမယ် */
-        }
-        @media (max-width: 480px) {
-            .featured-card { height: 400px; padding: 20px; }
-            .featured-title { font-size: 16px; }
-            .movie-card img { height: 180px; } /* ဖုန်းသေးသေးလေးတွေမှာ ပုံအမြင့်လျှော့မယ် */
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <header>
-        <a href="#" class="back-btn"><i class="fa-solid fa-arrow-left"></i></a>
-        <div class="page-title">My Collection</div>
-        <a href="#" class="notification-btn"><i class="fa-solid fa-bell"></i><div class="notification-badge"></div></a>
+        <a href="#" class="back-btn"><i class="fa-solid fa-bars"></i></a>
+        <div class="page-title">UNIX STREAM</div>
+        <a href="#" class="notification-btn"><i class="fa-solid fa-bell"></i><div class="badge"></div></a>
     </header>
 
     <main>
-        <div class="featured-container">
+        <div style="padding: 20px;">
             <div class="featured-card">
-                <div class="featured-title">Scream 7 (2026)</div>
-                <p class="featured-desc">The complete collection of Scream 7, including exclusive behind-the-scenes content.</p>
-                <div class="featured-stats">
-                    <span><i class="fa-solid fa-clock"></i> 1h 55m</span>
-                    <span><i class="fa-solid fa-message"></i> 1.2k</span>
-                    <span><i class="fa-solid fa-heart"></i> 4.5k</span>
-                </div>
+                <h2 style="font-size: 24px;">Scream 7</h2>
+                <p style="font-size: 12px; color: #ccc; margin-top: 5px;">Exclusive Collection (2026)</p>
             </div>
+            <h3 style="margin-bottom: 15px;">UNIX Originals</h3>
         </div>
 
-        <div class="section-header">
-            <h2>UNIX Originals</h2>
-            <a href="#">See all</a>
-        </div>
-        
         <div class="movie-grid">
-            <a href="https://unixstoremm-my-test-bot.hf.space/stream/21?hash=8f4813" class="movie-card">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpBagNEK94f2_Wq1CniKY2qMvNnOgiN6ItrDhOXLkdAjz9n6ZJk3nkUcbEzgXPSuytv5YVnnbtVlbmBnQOiV_n3wqIwjMd015qODAl&s=10" alt="Garfield">
+            <a href="#" class="movie-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpBagNEK94f2_Wq1CniKY2qMvNnOgiN6ItrDhOXLkdAjz9n6ZJk3nkUcbEzgXPSuytv5YVnnbtVlbmBnQOiV_n3wqIwjMd015qODAl&s=10">
                 <div class="movie-info">
                     <h3>The Garfield Movie</h3>
                     <div class="movie-details"><i class="fa-solid fa-star"></i> 9.5 RATING</div>
                 </div>
             </a>
-
-            <a href="https://unixstoremm-my-test-bot.hf.space/stream/20?hash=e30e9e" class="movie-card">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJrVOTQrlzEGAHyyLreyxbQFFk-pFWcO1nIkE3dbAf3z6E9gTE2_kBM13Y5fvCIiC60FKjbQ&s=10" alt="The Lost Bus">
+            <a href="#" class="movie-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJrVOTQrlzEGAHyyLreyxbQFFk-pFWcO1nIkE3dbAf3z6E9gTE2_kBM13Y5fvCIiC60FKjbQ&s=10">
                 <div class="movie-info">
                     <h3>The Lost Bus</h3>
                     <div class="movie-details"><i class="fa-solid fa-star"></i> 8.9 RATING</div>
-                </div>
-            </a>
-
-            <a href="https://unixstoremm-my-test-bot.hf.space/stream/22?hash=6a6ed7" class="movie-card">
-                <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRnBxg1VPXeRoYQ7tV8JK3ArgO2anv8qrypaVzXExLASr7wd_hb" alt="My Boo 2">
-                <div class="movie-info">
-                    <h3>My Boo 2</h3>
-                    <div class="movie-details"><i class="fa-solid fa-star"></i> 9.2 RATING</div>
-                </div>
-            </a>
-            
-            <a href="https://unixstoremm-my-test-bot.hf.space/stream/24?hash=119de4" class="movie-card">
-                <img src="https://unixstoremm-my-test-bot.hf.space/stream/25?hash=c623f8" alt="Good Luck Have Fun">
-                <div class="movie-info">
-                    <h3>Good Luck Have Fun Don't Die</h3>
-                    <div class="movie-details"><i class="fa-solid fa-star"></i> 7.4 RATING</div>
                 </div>
             </a>
         </div>
     </main>
 
     <nav>
-        <a href="index.html" class="active">
-            <i class="fa-solid fa-house"></i>
-            <span>Home</span>
-        </a>
-        
-        <a href="#">
-            <i class="fa-solid fa-compass"></i>
-            <span>Discover</span>
-        </a>
-        
-        <a href="#">
-            <i class="fa-solid fa-bookmark"></i>
-            <span>Watchlist</span>
-        </a>
-        
-        <a href="Profile.html">
-            <i class="fa-solid fa-user"></i>
-            <span>Profile</span>
-        </a>
+        <a href="index.html" class="active"><i class="fa-solid fa-house"></i><span>Home</span></a>
+        <a href="#"><i class="fa-solid fa-compass"></i><span>Discover</span></a>
+        <a href="#"><i class="fa-solid fa-bookmark"></i><span>Watchlist</span></a>
+        <a href="Profile.html"><i class="fa-solid fa-user"></i><span>Profile</span></a>
     </nav>
 </body>
 </html>
