@@ -3,147 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UNIX STREAM - Premium</title>
+    <title>UNIX STREAM - Collection List</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* --- Clean & Modern Core --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', 'Segoe UI', sans-serif; }
-        body { background-color: #F0F2F5; color: #1A1D29; overflow-x: hidden; }
+        /* --- Clean Core Styles --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', 'Segoe UI', sans-serif; }
+        body { background-color: #0c0c0d; color: #f9f9f9; overflow-x: hidden; }
 
-        /* --- Floating Navigation --- */
-        nav {
-            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            width: 90%; max-width: 400px;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            height: 65px; border-radius: 35px;
-            display: flex; justify-content: space-around; align-items: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            z-index: 1000; border: 1px solid rgba(253, 216, 53, 0.3);
-        }
-        nav a { color: #8E8E93; font-size: 22px; transition: 0.3s; }
-        nav a.active { color: #fdd835; transform: translateY(-5px); }
+        /* --- Header Section (Icon + Title + Notification) --- */
+        header { padding: 30px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .back-btn { color: #f9f9f9; font-size: 20px; text-decoration: none; }
+        .page-title { font-size: 18px; font-weight: 600; text-align: center; flex-grow: 1; }
+        .notification-btn { color: #f9f9f9; font-size: 20px; text-decoration: none; position: relative; }
+        .notification-badge { position: absolute; top: -5px; right: -5px; width: 10px; height: 10px; background: #E21B23; border-radius: 50%; border: 2px solid #0c0c0d; }
 
-        /* --- Top Header --- */
-        header { padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 24px; font-weight: 900; color: #fdd835; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
-        .user-profile { width: 40px; height: 40px; border-radius: 50%; background: #fdd835; display: flex; align-items: center; justify-content: center; color: white; }
+        /* --- Main Content Section --- */
+        main { padding-bottom: 90px; }
 
-        /* --- Disney+ Main Feature Card --- */
-        .hero-container { padding: 0 20px; margin-bottom: 30px; }
-        .hero-card {
-            width: 100%; height: 450px; border-radius: 30px;
-            background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.8) 100%),
-                        url('https://ntvb.tmsimg.com/assets/p28448171_v_h8_ad.jpg?w=1280&h=720');
+        /* --- Featured Collection Card --- */
+        .featured-collection-container { padding: 0 20px; margin-bottom: 30px; }
+        .featured-collection-card {
+            width: 100%; height: 500px; border-radius: 30px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent 40%),
+                        url('https://images.tntdrama.com/assets/images/2021/11/bobafett-poster-v1-1.jpg');
             background-size: cover; background-position: center;
             position: relative; overflow: hidden;
             display: flex; flex-direction: column; justify-content: flex-end; padding: 30px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.1);
         }
-        .hero-card h1 { font-size: 32px; color: white; margin-bottom: 5px; }
-        .hero-card p { font-size: 14px; color: #ddd; margin-bottom: 20px; }
-        .play-btn { 
-            width: 60px; height: 60px; background: #fdd835; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            color: #fff; font-size: 24px; text-decoration: none;
-            box-shadow: 0 5px 15px rgba(253, 216, 53, 0.4);
-        }
+        .collection-name { font-size: 18px; color: white; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px; }
+        .collection-description { font-size: 14px; color: #ccc; margin-bottom: 20px; }
+        .collection-stats { color: #fdd835; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 15px; }
 
-        /* --- Channel Tiles (Marvel, Pixar, Disney Style) --- */
-        .channels { padding: 0 20px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 30px; }
-        .channel-tile {
-            background: white; height: 80px; border-radius: 15px;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px solid #eee;
-            font-weight: 800; font-size: 14px; text-transform: uppercase; color: #333;
-        }
-        .channel-tile:hover { border-color: #fdd835; transform: scale(1.05); }
-
-        /* --- Movie Rows --- */
+        /* --- Row Section for Collection List --- */
         .section-header { padding: 0 25px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .section-header h2 { font-size: 18px; font-weight: 700; }
-        .section-header a { color: #fdd835; font-size: 13px; font-weight: 600; }
+        .section-header a { color: #888; font-size: 13px; font-weight: 500; }
 
-        .movie-row { display: flex; overflow-x: auto; padding: 0 20px; gap: 20px; scrollbar-width: none; }
-        .movie-row::-webkit-scrollbar { display: none; }
+        .collection-list-row { display: flex; overflow-x: auto; padding: 0 20px; gap: 20px; scrollbar-width: none; }
+        .collection-list-row::-webkit-scrollbar { display: none; }
 
-        .movie-card { min-width: 160px; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px solid #eee; }
-        .movie-card img { width: 100%; height: 220px; object-fit: cover; }
-        .movie-info { padding: 12px; }
-        .movie-info h3 { font-size: 13px; margin-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .rating { color: #fdd835; font-size: 11px; font-weight: 800; display: flex; align-items: center; gap: 4px; }
+        .collection-item-card { min-width: 140px; background: #121314; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); }
+        .collection-item-card img { width: 100%; height: 200px; object-fit: cover; }
+        .collection-item-info { padding: 12px; }
+        .collection-item-info h3 { font-size: 13px; margin-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #fff; }
+        .collection-item-details { color: #888; font-size: 11px; font-weight: 500; display: flex; align-items: center; gap: 8px; }
 
-        /* --- Search Bar --- */
-        .search-container { padding: 0 20px 20px 20px; }
-        .search-bar { width: 100%; background: white; border: none; padding: 12px 20px; border-radius: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); outline: none; }
+        /* --- Bottom Navigation Bar --- */
+        nav {
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            background: rgba(20, 21, 22, 0.95);
+            backdrop-filter: blur(5px);
+            height: 70px;
+            display: flex; justify-content: space-around; align-items: center;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+            z-index: 1000; border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        nav a { color: #888; font-size: 22px; transition: 0.3s; display: flex; flex-direction: column; align-items: center; gap: 5px; }
+        nav a.active { color: #f9f9f9; }
+        nav a i { font-size: 22px; }
+        nav a span { font-size: 11px; font-weight: 500; text-transform: capitalize; }
 
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">UNIX</div>
-        <div class="user-profile"><i class="fa-solid fa-user"></i></div>
+        <a href="#" class="back-btn"><i class="fa-solid fa-arrow-left"></i></a>
+        <div class="page-title">Collection List</div>
+        <a href="#" class="notification-btn"><i class="fa-solid fa-bell"></i><div class="notification-badge"></div></a>
     </header>
 
-    <div class="search-container">
-        <input type="text" class="search-bar" placeholder="Search your favorite movie...">
-    </div>
-
     <main>
-        <div class="hero-container">
-            <div class="hero-card">
-                <h1>Scream 7</h1>
-                <p>2026 | Horror | Mystery</p>
-                <a href="https://unixstoremm-my-test-bot.hf.space/stream/23?hash=4be59b" class="play-btn">
-                    <i class="fa-solid fa-play"></i>
-                </a>
+        <div class="featured-collection-container">
+            <div class="featured-collection-card">
+                <div class="collection-name">Boba Fett现代收藏 (The Book of Boba Fett Modern Collection)</div>
+                <p class="collection-description">All the movies and TV series about Boba Fett.</p>
+                <div class="collection-stats"><i class="fa-solid fa-clock"></i> 27 <i class="fa-solid fa-message"></i> 4.3k <i class="fa-solid fa-heart"></i> 7.5k</div>
             </div>
         </div>
 
-        <div class="channels">
-            <div class="channel-tile" style="color: #E21B23;">Marvel</div>
-            <div class="channel-tile" style="color: #0096D6;">Pixar</div>
-            <div class="channel-tile" style="color: #fdd835;">UNIX</div>
-        </div>
-
         <div class="section-header">
-            <h2>New Releases</h2>
+            <h2>UNIX Originals</h2>
             <a href="#">See all</a>
         </div>
-        <div class="movie-row">
-            <a href="https://unixstoremm-my-test-bot.hf.space/stream/21?hash=8f4813" class="movie-card">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpBagNEK94f2_Wq1CniKY2qMvNnOgiN6ItrDhOXLkdAjz9n6ZJk3nkUcbEzgXPSuytv5YVnnbtVlbmBnQOiV_n3wqIwjMd015qODAl&s=10" alt="Garfield">
-                <div class="movie-info">
-                    <h3>The Garfield Movie</h3>
-                    <div class="rating"><i class="fa-solid fa-star"></i> 9.5</div>
+        <div class="collection-list-row">
+            <a href="https://unixstoremm-my-test-bot.hf.space/stream/23?hash=4be59b" class="collection-item-card">
+                <img src="https://static.wikia.nocookie.net/lovedeathrobots/images/2/23/Love_Death_%2B_Robots_Volume_3_Poster.jpg" alt="Love Death + Robots">
+                <div class="collection-item-info">
+                    <h3>Love Death + Robots</h3>
+                    <div class="collection-item-details"><i class="fa-solid fa-tv"></i> Volume 3</div>
                 </div>
             </a>
 
-            <a href="https://unixstoremm-my-test-bot.hf.space/stream/20?hash=e30e9e" class="movie-card">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJrVOTQrlzEGAHyyLreyxbQFFk-pFWcO1nIkE3dbAf3z6E9gTE2_kBM13Y5fvCIiC60FKjbQ&s=10" alt="Lost Bus">
-                <div class="movie-info">
-                    <h3>The Lost Bus</h3>
-                    <div class="rating"><i class="fa-solid fa-star"></i> 8.9</div>
+            <a href="#" class="collection-item-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz9G5R7kLz7xQy_XkH_z7h8T7S7Z4l9E_i5w&s=10" alt="Westworld">
+                <div class="collection-item-info">
+                    <h3>Westworld</h3>
+                    <div class="collection-item-details"><i class="fa-solid fa-tv"></i> Season 4</div>
                 </div>
             </a>
 
-            <a href="https://unixstoremm-my-test-bot.hf.space/stream/22?hash=6a6ed7" class="movie-card">
-                <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRnBxg1VPXeRoYQ7tV8JK3ArgO2anv8qrypaVzXExLASr7wd_hb" alt="My Boo">
-                <div class="movie-info">
-                    <h3>My Boo 2</h3>
-                    <div class="rating"><i class="fa-solid fa-star"></i> 9.2</div>
+            <a href="#" class="collection-item-card">
+                <img src="https://static.wikia.nocookie.net/starwars/images/d/df/TheMandalorianSeries3OfficialPoster.jpg" alt="The Mandalorian">
+                <div class="collection-item-info">
+                    <h3>The Mandalorian</h3>
+                    <div class="collection-item-details"><i class="fa-solid fa-tv"></i> Season 3</div>
                 </div>
             </a>
         </div>
     </main>
 
     <nav>
-        <a href="#" class="active"><i class="fa-solid fa-house"></i></a>
-        <a href="#"><i class="fa-solid fa-bookmark"></i></a>
-        <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
-        <a href="#"><i class="fa-solid fa-bell"></i></a>
-        <a href="#"><i class="fa-solid fa-gear"></i></a>
+        <a href="#" class="active"><i class="fa-solid fa-house"></i><span>Home</span></a>
+        <a href="#"><i class="fa-solid fa-compass"></i><span>Discover</span></a>
+        <a href="#"><i class="fa-solid fa-plus"></i><span>Create</span></a>
+        <a href="#"><i class="fa-solid fa-heart"></i><span>Favorite</span></a>
+        <a href="#"><i class="fa-solid fa-user"></i><span>Profile</span></a>
     </nav>
 
 </body>
