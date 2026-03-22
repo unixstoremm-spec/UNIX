@@ -3,55 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UNIX Player - Streaming</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>UNIX STREAM - Player</title>
     <style>
-        body { margin: 0; background: #0b0c0d; color: white; font-family: 'Segoe UI', sans-serif; overflow: hidden; }
-        .wrapper { display: flex; flex-direction: column; height: 100vh; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #0b0c0d; color: white; font-family: sans-serif; overflow: hidden; }
         
-        /* Header/Nav */
-        .top-nav { padding: 20px 40px; background: rgba(0,0,0,0.5); display: flex; align-items: center; }
-        .back-link { color: #fdd835; text-decoration: none; font-weight: bold; font-size: 18px; display: flex; align-items: center; gap: 10px; }
-        
-        /* Player Container */
-        .player-box { flex: 1; display: flex; justify-content: center; align-items: center; padding: 20px; }
-        .video-wrapper { width: 100%; max-width: 1200px; aspect-ratio: 16/9; background: #000; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 50px rgba(0,0,0,0.5); border: 1px solid #222; }
-        iframe { width: 100%; height: 100%; border: none; }
+        .nav-header { 
+            padding: 15px 25px; 
+            background: #121314; 
+            display: flex; 
+            align-items: center;
+            border-bottom: 1px solid #222;
+        }
+        .back-btn { 
+            color: #fdd835; 
+            text-decoration: none; 
+            font-weight: bold; 
+            display: flex; 
+            align-items: center;
+            gap: 10px;
+        }
 
-        /* Loading Animation */
-        .loader { position: absolute; z-index: -1; color: #fdd835; font-size: 20px; }
+        .player-container {
+            width: 100%;
+            height: calc(100vh - 60px); /* Header စာကြောင်းစာ ဖယ်ထားတာပါ */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #000;
+        }
 
-        @media (max-width: 768px) {
-            .top-nav { padding: 15px; }
-            .player-box { padding: 10px; }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Loading စာတန်း */
+        .loading-text {
+            position: absolute;
+            z-index: -1;
+            color: #555;
         }
     </style>
 </head>
 <body>
 
-<div class="wrapper">
-    <div class="top-nav">
-        <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+    <div class="nav-header">
+        <a href="index.html" class="back-btn"> ← Back to Home </a>
     </div>
-    
-    <div class="player-box">
-        <div class="loader">Loading stream...</div>
-        <div class="video-wrapper">
-            <iframe id="mainPlayer" src="" allowfullscreen="true" scrolling="no"></iframe>
-        </div>
-    </div>
-</div>
 
-<script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const videoUrl = urlParams.get('url');
-    if (videoUrl) {
-        // Link ကို iframe ထဲ တိုက်ရိုက်ထည့်ခြင်း (Error ကင်းစေရန်)
-        document.getElementById('mainPlayer').src = videoUrl;
-    } else {
-        alert("Video link not found!");
-    }
-</script>
+    <div class="player-container">
+        <div class="loading-text">Loading Video...</div>
+        <iframe id="videoFrame" src="" allowfullscreen="true" scrolling="no"></iframe>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const movieUrl = urlParams.get('url');
+
+        if (movieUrl) {
+            // URL ထဲက Link ကို iframe ထဲ တန်းထည့်လိုက်တာပါ
+            document.getElementById('videoFrame').src = movieUrl;
+        } else {
+            alert("ဗီဒီယို Link ရှာမတွေ့ပါ!");
+        }
+    </script>
 
 </body>
 </html>
